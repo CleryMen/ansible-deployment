@@ -1,0 +1,5 @@
+PXE_BOOT_MENU="yes"
+PXE_ENABLE_UEFI="yes"
+DRBL_IFACE="{{ drbl_iface }}"
+DRBL_USE_DHCP="{{ drbl_use_dhcp_bool | ternary('yes','no') }}"
+DRBL_USE_PROX_DHCP="{{ drbl_use_proxydhcp_bool | ternary('yes','no') }}"
