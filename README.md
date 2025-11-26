@@ -18,7 +18,7 @@ Toujours sur Debian / Ubuntu :
 sudo apt update && sudo apt install -y ansible
 ```
 
-Vérifier l’installation :
+Vérifier l’installationn :
 
 ```bash
 ansible --version
