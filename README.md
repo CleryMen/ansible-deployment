@@ -1,4 +1,5 @@
-# Ansible Deployment STAGING
+# Ansible Deployment 0.1.3
+
 
 ## 🚀 Installation
 
@@ -18,7 +19,7 @@ Toujours sur Debian / Ubuntu :
 sudo apt update && sudo apt install -y ansible
 ```
 
-Vérifier l’installationn :
+Vérifier l’installation :
 
 ```bash
 ansible --version

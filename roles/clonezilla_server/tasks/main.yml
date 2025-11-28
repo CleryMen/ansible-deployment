@@ -1,0 +1,39 @@
+---
+- name: Installer DRBL et dépendances
+  apt:
+    name:
+      - drbl
+      - tftpd-hpa
+      - nfs-kernel-server
+    update_cache: yes
+    state: present
+
+- name: Créer le répertoire pour les images
+  file:
+    path: "{{ drbl_image_repo }}"
+    state: directory
+    mode: "0755"
+
+- name: Déployer drbl.conf
+  template:
+    src: drbl.conf.j2
+    dest: /etc/drbl/drbl.conf
+    mode: "0644"
+
+- name: Déployer drblpush.conf
+  template:
+    src: drblpush.conf.j2
+    dest: /etc/drbl/drblpush.conf
+    mode: "0644"
+
+- name: Générer configuration Clonezilla (mode automatique)
+  command: drblpush -a
+  register: drblpush_output
+
+- name: Redémarrer services essentiels
+  service:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - nfs-server
+    - tftpd-hpa

@@ -1,0 +1,4 @@
+drbl_iface: "eth0"
+drbl_use_dhcp_bool: false
+drbl_use_proxydhcp_bool: true
+drbl_image_repo: "/srv/clonezilla_images"

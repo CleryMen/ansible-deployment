@@ -1,5 +1,30 @@
-- name: Mise à jour des serveurs Debian
-  hosts: CL-Debian
+---
+- name: Mise à jour Debian – interactive
+  hosts: "{{ target_hosts }}"
   become: true
-  roles:
-    - debian_update_upgrade
+
+  vars_prompt:
+    - name: "target_hosts"
+      prompt: "Quels hosts veux-tu mettre à jour ? (ex : webservers, 172.16.1.20, all)"
+      private: no
+
+  tasks:
+    - name: Mise à jour des paquets (dist-upgrade + autoremove)
+      apt:
+        update_cache: yes
+        upgrade: dist
+        autoremove: yes
+      register: upgrade_result
+
+    - name: Afficher les paquets mis à jour
+      when: upgrade_result.changed
+      debug:
+        msg: |
+          📦 Mises à jour sur {{ inventory_hostname }} :
+          {{ upgrade_result.changes | to_nice_json }}
+
+    - name: Aucun paquet mis à jour
+      when: not upgrade_result.changed
+      debug:
+        msg: "👍 Aucun paquet n'avait besoin d'être mis à jour sur {{ inventory_hostname }}."
+
