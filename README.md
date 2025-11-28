@@ -1,4 +1,4 @@
-# Ansible Deployment 0.1.3
+# Ansible Deployment 0.1.4
 
 ## 🚀 Installation
 
@@ -87,8 +87,9 @@ ansible ALL=(ALL) NOPASSWD:ALL
 Sur la machine **où Ansible est installé** (ton contrôleur) :
 
 ```bash
-ssh-keygen -t ed25519 -C "ansible"
-ssh-copy-id ansible@IP_DE_LA_MACHINE
+ssh-keygen -t ed25519 -C "ansible_r1" -f ~/.ssh/ansible_r1
+ssh-copy-id -i ~/.ssh/ansible_r1.pub ansible@IP_R1
+
 ```
 
 Tester la connexion :
