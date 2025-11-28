@@ -9,9 +9,22 @@
       private: no
 
   tasks:
-    - name: Mise à jour des paquets
+    - name: Mise à jour des paquets (dist-upgrade + autoremove)
       apt:
         update_cache: yes
         upgrade: dist
         autoremove: yes
+      register: upgrade_result
+
+    - name: Afficher les paquets mis à jour
+      when: upgrade_result.changed
+      debug:
+        msg: |
+          📦 Mises à jour sur {{ inventory_hostname }} :
+          {{ upgrade_result.changes | to_nice_json }}
+
+    - name: Aucun paquet mis à jour
+      when: not upgrade_result.changed
+      debug:
+        msg: "👍 Aucun paquet n'avait besoin d'être mis à jour sur {{ inventory_hostname }}."
 
