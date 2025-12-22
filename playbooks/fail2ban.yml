@@ -1,0 +1,7 @@
+---
+- name: Installer et configurer Fail2ban
+  hosts: CL-R1
+  become: true
+
+  roles:
+    - fail2ban
