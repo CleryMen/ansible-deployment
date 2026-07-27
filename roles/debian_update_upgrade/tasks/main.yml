@@ -1,11 +1,11 @@
 ---
 - name: Mettre à jour la liste des paquets Debian
   apt:
-    update_cache: yes
+    update_cache: true
     cache_valid_time: 3600
 
 - name: Mettre à niveau tous les paquets Debian
   apt:
     upgrade: dist
-    autoremove: yes
-    autoclean: yes
+    autoremove: true
+    autoclean: true

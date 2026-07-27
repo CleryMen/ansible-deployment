@@ -6,14 +6,14 @@
   vars_prompt:
     - name: "target_hosts"
       prompt: "Quels hosts veux-tu mettre à jour ? (ex : webservers, 172.16.1.20, all)"
-      private: no
+      private: false
 
   tasks:
     - name: Mise à jour des paquets (dist-upgrade + autoremove)
       apt:
-        update_cache: yes
+        update_cache: true
         upgrade: dist
-        autoremove: yes
+        autoremove: true
       register: upgrade_result
 
     - name: Afficher les paquets mis à jour
@@ -27,4 +27,3 @@
       when: not upgrade_result.changed
       debug:
         msg: "👍 Aucun paquet n'avait besoin d'être mis à jour sur {{ inventory_hostname }}."
-
