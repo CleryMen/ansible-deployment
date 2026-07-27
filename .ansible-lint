@@ -1,4 +1,4 @@
 ---
-profile: basic
+profile: production
 exclude_paths:
   - .git/

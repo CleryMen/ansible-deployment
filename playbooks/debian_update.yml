@@ -10,20 +10,20 @@
 
   tasks:
     - name: Mise à jour des paquets (dist-upgrade + autoremove)
-      apt:
+      ansible.builtin.apt:
         update_cache: true
         upgrade: dist
         autoremove: true
       register: upgrade_result
 
-    - name: Afficher les paquets mis à jour
+    - name: Afficher les paquets mis à jour  # noqa: no-handler
       when: upgrade_result.changed
-      debug:
+      ansible.builtin.debug:
         msg: |
           📦 Mises à jour sur {{ inventory_hostname }} :
           {{ upgrade_result.changes | to_nice_json }}
 
     - name: Aucun paquet mis à jour
       when: not upgrade_result.changed
-      debug:
+      ansible.builtin.debug:
         msg: "👍 Aucun paquet n'avait besoin d'être mis à jour sur {{ inventory_hostname }}."
