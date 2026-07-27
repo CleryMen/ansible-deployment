@@ -1,0 +1,3 @@
+---
+# Variables communes à toutes les machines de l'environnement lab
+ansible_user: ansible
