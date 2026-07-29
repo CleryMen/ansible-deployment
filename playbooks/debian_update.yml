@@ -8,20 +8,5 @@
       prompt: "Quels hosts veux-tu mettre à jour ? (ex : webservers, 172.16.1.20, all)"
       private: false
 
-  tasks:
-    - name: Mise à jour des paquets (dist-upgrade + autoremove)
-      ansible.builtin.apt:
-        update_cache: true
-        upgrade: dist
-        autoremove: true
-      register: upgrade_result
-
-    - name: Afficher les paquets mis à jour  # noqa: no-handler
-      when: upgrade_result.changed
-      ansible.builtin.debug:
-        msg: "Des paquets ont été mis à jour sur {{ inventory_hostname }}."
-
-    - name: Aucun paquet mis à jour
-      when: not upgrade_result.changed
-      ansible.builtin.debug:
-        msg: "👍 Aucun paquet n'avait besoin d'être mis à jour sur {{ inventory_hostname }}."
+  roles:
+    - debian_update_upgrade

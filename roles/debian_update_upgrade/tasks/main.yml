@@ -1,11 +1,17 @@
 ---
-- name: Mettre à jour la liste des paquets Debian
+- name: Mise à jour des paquets (dist-upgrade + autoremove)
   ansible.builtin.apt:
     update_cache: true
-    cache_valid_time: 3600
-
-- name: Mettre à niveau tous les paquets Debian
-  ansible.builtin.apt:
     upgrade: dist
     autoremove: true
-    autoclean: true
+  register: debian_update_upgrade_result
+
+- name: Afficher les paquets mis à jour  # noqa: no-handler
+  when: debian_update_upgrade_result.changed
+  ansible.builtin.debug:
+    msg: "Des paquets ont été mis à jour sur {{ inventory_hostname }}."
+
+- name: Aucun paquet mis à jour
+  when: not debian_update_upgrade_result.changed
+  ansible.builtin.debug:
+    msg: "👍 Aucun paquet n'avait besoin d'être mis à jour sur {{ inventory_hostname }}."
