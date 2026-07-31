@@ -1,0 +1,8 @@
+# Fichier géré par Ansible (rôle ssh_hardening). Ne pas éditer à la main.
+Port {{ ssh_hardening_port }}
+PermitRootLogin {{ ssh_hardening_permit_root_login }}
+PasswordAuthentication {{ ssh_hardening_password_authentication }}
+PubkeyAuthentication {{ ssh_hardening_pubkey_authentication }}
+PermitEmptyPasswords {{ ssh_hardening_permit_empty_passwords }}
+X11Forwarding {{ ssh_hardening_x11_forwarding }}
+MaxAuthTries {{ ssh_hardening_max_auth_tries }}

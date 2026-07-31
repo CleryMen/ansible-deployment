@@ -1,0 +1,12 @@
+---
+- name: Durcissement SSH
+  hosts: "{{ target_hosts }}"
+  become: true
+
+  vars_prompt:
+    - name: "target_hosts"
+      prompt: "Sur quels hosts appliquer le durcissement SSH ? (ex : CL-R1, all)"
+      private: false
+
+  roles:
+    - ssh_hardening
